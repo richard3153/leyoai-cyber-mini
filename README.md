@@ -8,9 +8,9 @@
 
 ### Overview
 
-**LeyoAI Cyber Security Assistant (Mini)** is part of the [LeyoAI](https://leyoai.vercel.app) platform by [杭州市上城区乐友信息服务工作室](https://leyoai.vercel.app).
+**LeyoAI Cyber Security Assistant (Mini)** — Part of the [LeyoAI](https://leyoai.vercel.app) platform by 杭州市上城区乐友信息服务工作室.
 
-Cyber Security Assistant — Detects vulnerabilities, classifies attacks, and extracts security entities from text.
+Cyber Security Assistant — Detects vulnerabilities, classifies attacks, extracts security entities.
 
 ### Model Details
 
@@ -18,7 +18,7 @@ Cyber Security Assistant — Detects vulnerabilities, classifies attacks, and ex
 |------|-------|
 | Base Model | `Qwen/Qwen2.5-0.5B-Instruct` |
 | PEFT Type | LoRA |
-| LoRA Rank (r) | 8 |
+| LoRA Rank | 8 |
 | LoRA Alpha | 16 |
 | LoRA Dropout | 0.1 |
 | Target Modules | ['k_proj', 'o_proj', 'q_proj', 'v_proj'] |
@@ -32,21 +32,20 @@ Cyber Security Assistant — Detects vulnerabilities, classifies attacks, and ex
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-base_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-
-model = PeftModel.from_pretrained(base_model, "richard3153/leyoai-cyber-mini")
+base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+tok = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+model = PeftModel.from_pretrained(base, "richard3153/leyoai-cyber-mini")
 model.eval()
 
-messages = [{"role": "user", "content": "Your question here"}]
-inputs = tokenizer.apply_chat_template(messages, return_tensors="pt")
-outputs = model.generate(inputs, max_new_tokens=256)
-print(tokenizer.decode(outputs[0]))
+msgs = [{"role": "user", "content": "Your question"}]
+inputs = tok.apply_chat_template(msgs, return_tensors="pt")
+out = model.generate(inputs, max_new_tokens=256)
+print(tok.decode(out[0]))
 ```
 
 ### HuggingFace
 
-This model is also available on HuggingFace: [FFZwai/leyoai-cyber-mini](https://huggingface.co/FFZwai/leyoai-cyber-mini)
+Also available: [FFZwai/leyoai-cyber-mini](https://huggingface.co/FFZwai/leyoai-cyber-mini)
 
 ---
 
@@ -54,9 +53,9 @@ This model is also available on HuggingFace: [FFZwai/leyoai-cyber-mini](https://
 
 ### 概述
 
-**LeyoAI 网络安全助手（迷你版）** 是[杭州市上城区乐友信息服务工作室](https://leyoai.vercel.app)旗下 [LeyoAI](https://leyoai.vercel.app) 平台的一部分。
+**LeyoAI 网络安全助手（迷你版）** — [杭州市上城区乐友信息服务工作室](https://leyoai.vercel.app)旗下 [LeyoAI](https://leyoai.vercel.app) 平台。
 
-网络安全助手 — 检测漏洞、分类攻击类型、从文本中提取安全实体。
+网络安全助手 — 检测漏洞、分类攻击类型、提取安全实体。
 
 ### 模型详情
 
@@ -64,11 +63,9 @@ This model is also available on HuggingFace: [FFZwai/leyoai-cyber-mini](https://
 |------|-----|
 | 基座模型 | `Qwen/Qwen2.5-0.5B-Instruct` |
 | 微调方式 | LoRA |
-| LoRA 秩 (r) | 8 |
+| LoRA 秩 | 8 |
 | LoRA Alpha | 16 |
-| LoRA Dropout | 0.1 |
 | 目标模块 | ['k_proj', 'o_proj', 'q_proj', 'v_proj'] |
-| 任务类型 | CAUSAL_LM |
 | 训练设备 | Apple Mac Studio (MPS) |
 | 精度 | FP32 |
 
@@ -78,30 +75,27 @@ This model is also available on HuggingFace: [FFZwai/leyoai-cyber-mini](https://
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-base_model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-
-model = PeftModel.from_pretrained(base_model, "richard3153/leyoai-cyber-mini")
+base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+tok = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
+model = PeftModel.from_pretrained(base, "richard3153/leyoai-cyber-mini")
 model.eval()
 
-messages = [{"role": "user", "content": "你的问题"}]
-inputs = tokenizer.apply_chat_template(messages, return_tensors="pt")
-outputs = model.generate(inputs, max_new_tokens=256)
-print(tokenizer.decode(outputs[0]))
+msgs = [{"role": "user", "content": "你的问题"}]
+inputs = tok.apply_chat_template(msgs, return_tensors="pt")
+out = model.generate(inputs, max_new_tokens=256)
+print(tok.decode(out[0]))
 ```
 
 ### HuggingFace
 
-本模型也可在 HuggingFace 获取：[FFZwai/leyoai-cyber-mini](https://huggingface.co/FFZwai/leyoai-cyber-mini)
+也可在 HuggingFace 获取：[FFZwai/leyoai-cyber-mini](https://huggingface.co/FFZwai/leyoai-cyber-mini)
 
 ---
 
 ## License
 
-MIT License — [杭州市上城区乐友信息服务工作室](https://leyoai.vercel.app)
+MIT License — 杭州市上城区乐友信息服务工作室
 
 ## Links
 
-- 🌐 [LeyoAI Official Website](https://leyoai.vercel.app)
-- 🤗 [HuggingFace Organization](https://huggingface.co/FFZwai)
-- 💻 [GitHub Organization](https://github.com/richard3153)
+- 🌐 [LeyoAI](https://leyoai.vercel.app) | 🤗 [HuggingFace](https://huggingface.co/FFZwai) | 💻 [GitHub](https://github.com/richard3153)
